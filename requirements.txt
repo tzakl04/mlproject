@@ -1,0 +1,13 @@
+geopandas
+joblib
+markdown
+matplotlib
+numpy
+openpyxl
+pandas
+requests
+scikit-learn
+scipy
+shap
+shapely
+xgboost
