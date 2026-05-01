@@ -1,0 +1,19 @@
+{
+  "task": "injury",
+  "model_1": {
+    "experiment_group": "model_suite",
+    "feature_set": "county_selected",
+    "model_name": "xgboost"
+  },
+  "model_2": {
+    "experiment_group": "model_suite",
+    "feature_set": "county_selected",
+    "model_name": "neural_network"
+  },
+  "test_set_delong": {
+    "auc_1": 0.8715177972224514,
+    "auc_2": 0.870757690888339,
+    "z": 0.5704864402709234,
+    "p_value": 0.5683478163954954
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "task": "fatality",
+  "target_col": "fat_bin",
+  "feature_set": "tornado_only",
+  "model_name": "random_forest",
+  "selected_descriptor": "tornado_only",
+  "cv_splits": 3,
+  "imbalance_strategy": "class_weight=balanced_subsample",
+  "best_params": {
+    "classifier__n_estimators": 500,
+    "classifier__min_samples_leaf": 5,
+    "classifier__max_features": 0.5,
+    "classifier__max_depth": 20
+  },
+  "cv_best_auprc": 0.3790860016802313,
+  "validation_threshold": 0.7501070226899812,
+  "selected_feature_count": 18,
+  "selected_features": [
+    "num__mag_num",
+    "num__mag_missing",
+    "num__len",
+    "num__wid",
+    "num__end_missing",
+    "num__wid_missing",
+    "num__len_zero",
+    "cat__season_Fall",
+    "cat__season_Spring",
+    "cat__season_Summer",
+    "cat__season_Winter",
+    "cat__region_High Plains",
+    "cat__region_Midwest",
+    "cat__region_Noncontiguous",
+    "cat__region_Northeast",
+    "cat__region_Southeast",
+    "cat__region_Southern",
+    "cat__region_Western"
+  ],
+  "val_metrics": {
+    "precision": 0.5024875621890548,
+    "recall": 0.43162393162393164,
+    "f1": 0.46436781609195404,
+    "auroc": 0.9163517288326565,
+    "auprc": 0.4035046581100306,
+    "tp": 101,
+    "fp": 100,
+    "tn": 9731,
+    "fn": 133
+  },
+  "test_metrics": {
+    "precision": 0.44761904761904764,
+    "recall": 0.4017094017094017,
+    "f1": 0.42342342342342343,
+    "auroc": 0.900802841526064,
+    "auprc": 0.3589531670212343,
+    "tp": 94,
+    "fp": 116,
+    "tn": 9715,
+    "fn": 140
+  }
+}

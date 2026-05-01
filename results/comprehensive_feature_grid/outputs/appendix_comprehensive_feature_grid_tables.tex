@@ -1,0 +1,69 @@
+Table~\ref{tab:appendix_all_results_injury} and Table~\ref{tab:appendix_all_results_fatality} report the full model-by-feature-set grid. Logistic regression was evaluated on all three feature sets, and the remaining model families were additionally evaluated on the tornado-only and county-enriched feature sets so that every model-feature-set combination is represented.
+
+\begin{table}[H]
+\centering
+\caption{Comprehensive injury-prediction performance across all model-feature-set combinations.}
+\label{tab:appendix_all_results_injury}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.05}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lllccccccccccccc}
+\toprule
+Model & Feature set & CV AUPRC & Val thr. & Sel. feats & Val Prec. & Val Rec. & Val F1 & Val AUROC & Val AUPRC & Test Prec. & Test Rec. & Test F1 & Test AUROC & Test AUPRC \\
+\midrule
+Baseline logistic & Tornado Only & 0.512 & 0.757 & 18 & 0.481 & 0.536 & 0.507 & 0.861 & 0.519 & 0.485 & 0.538 & 0.510 & 0.866 & 0.528 \\
+Random forest & Tornado Only & 0.508 & 0.653 & 18 & 0.460 & 0.585 & 0.515 & 0.858 & 0.508 & 0.450 & 0.566 & 0.501 & 0.865 & 0.522 \\
+XGBoost & Tornado Only & 0.520 & 0.707 & 18 & 0.451 & 0.605 & 0.516 & 0.865 & 0.526 & 0.448 & 0.595 & 0.511 & 0.868 & 0.532 \\
+Linear SVM & Tornado Only & 0.512 & 0.441 & 18 & 0.510 & 0.501 & 0.505 & 0.861 & 0.518 & 0.507 & 0.492 & 0.499 & 0.866 & 0.528 \\
+Neural network & Tornado Only & 0.518 & 0.737 & 18 & 0.472 & 0.555 & 0.510 & 0.863 & 0.525 & 0.475 & 0.555 & 0.512 & 0.868 & 0.535 \\
+KNN & Tornado Only & 0.372 & 0.256 & 18 & 0.406 & 0.547 & 0.466 & 0.800 & 0.383 & 0.404 & 0.539 & 0.462 & 0.796 & 0.383 \\
+Baseline logistic & County Enriched & 0.518 & 0.742 & 44 & 0.475 & 0.557 & 0.513 & 0.866 & 0.526 & 0.472 & 0.548 & 0.507 & 0.868 & 0.533 \\
+Random forest & County Enriched & 0.503 & 0.516 & 44 & 0.474 & 0.512 & 0.492 & 0.853 & 0.493 & 0.480 & 0.516 & 0.497 & 0.864 & 0.521 \\
+XGBoost & County Enriched & 0.535 & 0.712 & 44 & 0.477 & 0.584 & 0.525 & 0.869 & 0.538 & 0.474 & 0.578 & 0.521 & 0.872 & 0.547 \\
+Linear SVM & County Enriched & 0.516 & 0.397 & 44 & 0.481 & 0.550 & 0.513 & 0.866 & 0.524 & 0.477 & 0.539 & 0.506 & 0.867 & 0.531 \\
+Neural network & County Enriched & 0.523 & 0.795 & 44 & 0.528 & 0.507 & 0.517 & 0.869 & 0.529 & 0.535 & 0.506 & 0.520 & 0.871 & 0.546 \\
+KNN & County Enriched & 0.426 & 0.238 & 44 & 0.434 & 0.480 & 0.456 & 0.840 & 0.439 & 0.454 & 0.480 & 0.466 & 0.840 & 0.456 \\
+Selected logistic & County Selected & 0.519 & 0.758 & 20 & 0.493 & 0.539 & 0.515 & 0.866 & 0.525 & 0.487 & 0.531 & 0.508 & 0.867 & 0.533 \\
+Random forest & County Selected & 0.517 & 0.638 & 20 & 0.505 & 0.522 & 0.513 & 0.864 & 0.509 & 0.497 & 0.510 & 0.503 & 0.868 & 0.527 \\
+XGBoost & County Selected & 0.535 & 0.708 & 20 & 0.473 & 0.592 & 0.525 & 0.869 & 0.536 & 0.469 & 0.587 & 0.521 & 0.872 & 0.543 \\
+Linear SVM & County Selected & 0.517 & 0.385 & 20 & 0.471 & 0.567 & 0.514 & 0.866 & 0.524 & 0.465 & 0.558 & 0.507 & 0.867 & 0.535 \\
+Neural network & County Selected & 0.527 & 0.725 & 20 & 0.477 & 0.572 & 0.520 & 0.869 & 0.530 & 0.480 & 0.562 & 0.518 & 0.871 & 0.545 \\
+KNN & County Selected & 0.427 & 0.190 & 20 & 0.380 & 0.638 & 0.477 & 0.841 & 0.426 & 0.386 & 0.637 & 0.481 & 0.841 & 0.450 \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Comprehensive fatality-prediction performance across all model-feature-set combinations.}
+\label{tab:appendix_all_results_fatality}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.05}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lllccccccccccccc}
+\toprule
+Model & Feature set & CV AUPRC & Val thr. & Sel. feats & Val Prec. & Val Rec. & Val F1 & Val AUROC & Val AUPRC & Test Prec. & Test Rec. & Test F1 & Test AUROC & Test AUPRC \\
+\midrule
+Baseline logistic & Tornado Only & 0.425 & 0.948 & 18 & 0.509 & 0.474 & 0.491 & 0.930 & 0.435 & 0.485 & 0.419 & 0.450 & 0.925 & 0.400 \\
+Random forest & Tornado Only & 0.379 & 0.750 & 18 & 0.502 & 0.432 & 0.464 & 0.916 & 0.404 & 0.448 & 0.402 & 0.423 & 0.901 & 0.359 \\
+XGBoost & Tornado Only & 0.430 & 0.929 & 18 & 0.482 & 0.517 & 0.499 & 0.930 & 0.448 & 0.447 & 0.449 & 0.448 & 0.922 & 0.403 \\
+Linear SVM & Tornado Only & 0.427 & 0.924 & 18 & 0.500 & 0.483 & 0.491 & 0.930 & 0.440 & 0.485 & 0.419 & 0.450 & 0.925 & 0.400 \\
+Neural network & Tornado Only & 0.428 & 0.925 & 18 & 0.488 & 0.509 & 0.498 & 0.933 & 0.440 & 0.456 & 0.444 & 0.450 & 0.927 & 0.399 \\
+KNN & Tornado Only & 0.274 & 0.230 & 18 & 0.403 & 0.487 & 0.441 & 0.887 & 0.331 & 0.378 & 0.449 & 0.410 & 0.846 & 0.275 \\
+Baseline logistic & County Enriched & 0.423 & 0.943 & 44 & 0.504 & 0.483 & 0.493 & 0.931 & 0.452 & 0.471 & 0.410 & 0.438 & 0.927 & 0.385 \\
+Random forest & County Enriched & 0.411 & 0.569 & 44 & 0.490 & 0.504 & 0.497 & 0.920 & 0.452 & 0.417 & 0.432 & 0.424 & 0.915 & 0.351 \\
+XGBoost & County Enriched & 0.432 & 0.933 & 44 & 0.568 & 0.462 & 0.509 & 0.933 & 0.473 & 0.515 & 0.436 & 0.472 & 0.925 & 0.405 \\
+Linear SVM & County Enriched & 0.422 & 0.966 & 44 & 0.533 & 0.453 & 0.490 & 0.930 & 0.460 & 0.503 & 0.389 & 0.439 & 0.926 & 0.389 \\
+Neural network & County Enriched & 0.420 & 0.958 & 44 & 0.512 & 0.444 & 0.476 & 0.926 & 0.435 & 0.458 & 0.372 & 0.410 & 0.919 & 0.339 \\
+KNN & County Enriched & 0.305 & 0.172 & 44 & 0.420 & 0.462 & 0.440 & 0.895 & 0.352 & 0.395 & 0.393 & 0.394 & 0.861 & 0.279 \\
+Selected logistic & County Selected & 0.428 & 0.958 & 20 & 0.576 & 0.423 & 0.488 & 0.930 & 0.444 & 0.528 & 0.368 & 0.433 & 0.926 & 0.378 \\
+Random forest & County Selected & 0.417 & 0.542 & 20 & 0.470 & 0.530 & 0.498 & 0.921 & 0.454 & 0.421 & 0.436 & 0.429 & 0.911 & 0.357 \\
+XGBoost & County Selected & 0.432 & 0.930 & 20 & 0.545 & 0.491 & 0.517 & 0.930 & 0.472 & 0.502 & 0.457 & 0.479 & 0.923 & 0.404 \\
+Linear SVM & County Selected & 0.429 & 0.900 & 20 & 0.483 & 0.487 & 0.485 & 0.930 & 0.448 & 0.444 & 0.423 & 0.433 & 0.926 & 0.386 \\
+Neural network & County Selected & 0.429 & 0.912 & 20 & 0.517 & 0.509 & 0.513 & 0.930 & 0.439 & 0.466 & 0.436 & 0.450 & 0.922 & 0.367 \\
+KNN & County Selected & 0.340 & 0.203 & 20 & 0.463 & 0.487 & 0.475 & 0.885 & 0.369 & 0.431 & 0.415 & 0.423 & 0.873 & 0.298 \\
+\bottomrule
+\end{tabular}}
+\end{table}

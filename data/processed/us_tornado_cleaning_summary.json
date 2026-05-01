@@ -1,0 +1,26 @@
+{
+  "raw_rows": 67558,
+  "duplicate_rows_removed": 462,
+  "invalid_dates_dropped": 0,
+  "clean_rows": 67096,
+  "year_min": 1950,
+  "year_max": 2021,
+  "states_unique": 53,
+  "injury_positive_rows": 7686,
+  "fatality_positive_rows": 1559,
+  "mag_missing_rows": 605,
+  "end_missing_rows": 26023,
+  "wid_missing_rows": 469,
+  "len_zero_rows": 122,
+  "possible_segment_1km_rows": 927,
+  "possible_segment_2km_rows": 1750,
+  "segment_cross_state_1km_source_rows": 23,
+  "segment_cross_state_2km_source_rows": 42,
+  "notes": [
+    "All years are retained.",
+    "No imputation is performed here. NaNs are left in place so that imputation can be fit on training data only later.",
+    "Likely track segmentation is flagged but not merged. The unit remains the report row, not a guaranteed unique physical tornado.",
+    "Magnitude -9 is treated as unknown; width 0 is treated as coded missingness; endpoint (0,0) is treated as coded missingness; length 0 is retained and flagged.",
+    "Season is derived from month as Winter/Spring/Summer/Fall."
+  ]
+}

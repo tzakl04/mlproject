@@ -1,0 +1,190 @@
+{
+  "task": "fatality",
+  "selected_by": "validation_auprc_then_validation_f1",
+  "best_model": {
+    "experiment_group": "model_suite",
+    "feature_set": "county_selected",
+    "model_name": "xgboost"
+  },
+  "shap_summary": {
+    "selected_feature_count": 20,
+    "top_global_features": [
+      {
+        "feature": "num__mag_num",
+        "mean_abs_shap": 0.15717721504983573
+      },
+      {
+        "feature": "num__end_county_age_65plus_share",
+        "mean_abs_shap": 0.0252162726029125
+      },
+      {
+        "feature": "cat__region_Western",
+        "mean_abs_shap": 0.02103753306387261
+      },
+      {
+        "feature": "num__end_county_disability_rate",
+        "mean_abs_shap": 0.015303859649153914
+      },
+      {
+        "feature": "num__path_age_under18_share_wavg",
+        "mean_abs_shap": 0.009808690253560903
+      },
+      {
+        "feature": "cat__season_Winter",
+        "mean_abs_shap": 0.008745983473202917
+      },
+      {
+        "feature": "cat__season_Spring",
+        "mean_abs_shap": 0.008243790693345545
+      },
+      {
+        "feature": "num__mag_missing",
+        "mean_abs_shap": 0.007856303401987738
+      },
+      {
+        "feature": "cat__region_Northeast",
+        "mean_abs_shap": 0.007567341319988067
+      },
+      {
+        "feature": "num__end_county_unemployment_rate",
+        "mean_abs_shap": 0.0062668423181442764
+      },
+      {
+        "feature": "num__len",
+        "mean_abs_shap": 0.004728516918786834
+      },
+      {
+        "feature": "num__path_disability_rate_wavg",
+        "mean_abs_shap": 0.0046366005765488185
+      },
+      {
+        "feature": "num__start_county_unemployment_rate",
+        "mean_abs_shap": 0.0030577017920889677
+      },
+      {
+        "feature": "num__path_age_65plus_share_wavg",
+        "mean_abs_shap": 0.0028800702887989845
+      },
+      {
+        "feature": "cat__region_Midwest",
+        "mean_abs_shap": 0.002399826128557834
+      }
+    ],
+    "local_cases": [
+      {
+        "case_label": "highest_risk",
+        "predicted_score": 0.9655324816703796,
+        "true_label": 1,
+        "top_contributions": [
+          {
+            "feature": "num__mag_num",
+            "shap_value": 0.5409675186456299,
+            "feature_value": 2.4833762349476607
+          },
+          {
+            "feature": "cat__region_Western",
+            "shap_value": 0.1119897493150347,
+            "feature_value": 1.000026983499738
+          },
+          {
+            "feature": "num__end_county_age_65plus_share",
+            "shap_value": 0.07388539374890873,
+            "feature_value": 4.194501621726069
+          },
+          {
+            "feature": "num__mag_missing",
+            "shap_value": 0.008420161168760374,
+            "feature_value": 0.0
+          },
+          {
+            "feature": "num__len",
+            "shap_value": 0.008015648406581033,
+            "feature_value": 0.10601490571399617
+          },
+          {
+            "feature": "cat__season_Spring",
+            "shap_value": 0.007011733485099587,
+            "feature_value": -0.6407354812109001
+          },
+          {
+            "feature": "num__end_county_disability_rate",
+            "shap_value": 0.006531043493184073,
+            "feature_value": -0.40588403248767974
+          },
+          {
+            "feature": "cat__season_Winter",
+            "shap_value": 0.0064151463569336,
+            "feature_value": -0.02574318863229305
+          },
+          {
+            "feature": "cat__region_Northeast",
+            "shap_value": -0.003726600615179144,
+            "feature_value": 0.4468551781619679
+          },
+          {
+            "feature": "num__path_disability_rate_wavg",
+            "shap_value": 0.0035958906696274932,
+            "feature_value": -0.44328187491367493
+          }
+        ]
+      },
+      {
+        "case_label": "lowest_risk",
+        "predicted_score": 0.007644919212907553,
+        "true_label": 0,
+        "top_contributions": [
+          {
+            "feature": "num__mag_num",
+            "shap_value": -0.12406025291056721,
+            "feature_value": -0.8751634956384761
+          },
+          {
+            "feature": "cat__region_Western",
+            "shap_value": -0.0455735868975656,
+            "feature_value": -0.10352920110574036
+          },
+          {
+            "feature": "num__mag_missing",
+            "shap_value": -0.019150312516164076,
+            "feature_value": 1.0
+          },
+          {
+            "feature": "num__end_county_age_65plus_share",
+            "shap_value": -0.013678461137230138,
+            "feature_value": -0.40063733138890373
+          },
+          {
+            "feature": "num__path_age_under18_share_wavg",
+            "shap_value": -0.007963724548729562,
+            "feature_value": -0.527715493074201
+          },
+          {
+            "feature": "num__end_county_disability_rate",
+            "shap_value": 0.005093132221857861,
+            "feature_value": -0.0445278290907401
+          },
+          {
+            "feature": "num__path_age_65plus_share_wavg",
+            "shap_value": 0.0048037908567494,
+            "feature_value": 0.0
+          },
+          {
+            "feature": "cat__region_Northeast",
+            "shap_value": 0.004074347446839968,
+            "feature_value": -0.4678883942582101
+          },
+          {
+            "feature": "cat__season_Winter",
+            "shap_value": -0.003655787816630134,
+            "feature_value": 0.48712994133615495
+          },
+          {
+            "feature": "cat__season_Spring",
+            "shap_value": 0.002769108557185972,
+            "feature_value": -0.08162073977712382
+          }
+        ]
+      }
+    ]
+  }
+}

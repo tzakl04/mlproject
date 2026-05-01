@@ -1,0 +1,39 @@
+{
+  "input_dataset": "C:\\Users\\singc\\OneDrive\\Documents\\bruh code\\4641\\Project\\final_tornado_dataset_region_reduced.csv",
+  "random_state": 42,
+  "splits": {
+    "train_share": 0.7,
+    "validation_share": 0.15,
+    "test_share": 0.15
+  },
+  "cv_splits": 3,
+  "pdf_alignment": [
+    "Cleaning and format handling comes from the existing final_tornado_dataset.csv built from the PDF-described preprocessing.",
+    "The modeling dataset replaces state codes with broader NOAA-style regions before any modeling.",
+    "The modeling candidate set keeps only PDF-aligned storm, season/location, and county vulnerability/exposure variables.",
+    "Baselines are logistic regression on tornado-only and county-enriched feature sets.",
+    "Feature selection is a separate explicit stage using L1-regularized logistic regression on the training split only.",
+    "Downstream model comparison runs on the selected county-enriched feature set.",
+    "Thresholds are chosen on the validation split by maximizing validation F1 and then applied to the test split.",
+    "Final post-processing includes DeLong AUROC comparison and SHAP for the best validation model."
+  ],
+  "pragmatic_decisions": [
+    "Cross-validation defaults to 3 folds because the user explicitly requested a faster same-day completion path.",
+    "Feature selection uses a single fixed L1-logistic penalty strength (C=0.05) instead of a selector CV sweep, per user request to keep this stage simple.",
+    "When more than 20 coefficients survive the L1 fit, the selector keeps the top 20 by absolute coefficient magnitude.",
+    "States and territories are replaced with broader regions so the selector cannot spend feature budget on state-level dummies.",
+    "Raw coordinates, raw year/month/day fields, segmentation diagnostics, overlay metadata flags, and duplicate magnitude encoding are excluded before feature selection.",
+    "SVM is implemented as LinearSVC for tractability at 67k rows.",
+    "KNN is kept in the comparison, but sklearn KNN has no native class-weight support, so no resampling is added.",
+    "Neural-network imbalance handling uses balanced sample weights, which sklearn MLP supports directly."
+  ],
+  "imbalance_handling": {
+    "baseline_logistic": "class_weight=balanced",
+    "logistic_regression": "class_weight=balanced",
+    "random_forest": "class_weight=balanced_subsample",
+    "xgboost": "scale_pos_weight=neg_pos_ratio",
+    "svm": "class_weight=balanced",
+    "neural_network": "balanced sample weights passed to fit",
+    "knn": "no native class-weight support; distance weighting only"
+  }
+}

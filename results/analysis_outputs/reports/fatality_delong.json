@@ -1,0 +1,19 @@
+{
+  "task": "fatality",
+  "model_1": {
+    "experiment_group": "model_suite",
+    "feature_set": "county_selected",
+    "model_name": "xgboost"
+  },
+  "model_2": {
+    "experiment_group": "model_suite",
+    "feature_set": "county_selected",
+    "model_name": "random_forest"
+  },
+  "test_set_delong": {
+    "auc_1": 0.9233627362251103,
+    "auc_2": 0.9106015595182516,
+    "z": 2.7752883992413504,
+    "p_value": 0.005515277605547819
+  }
+}

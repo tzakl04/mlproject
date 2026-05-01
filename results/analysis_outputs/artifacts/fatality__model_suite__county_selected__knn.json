@@ -1,0 +1,59 @@
+{
+  "task": "fatality",
+  "target_col": "fat_bin",
+  "experiment_group": "model_suite",
+  "feature_set": "county_selected",
+  "model_name": "knn",
+  "cv_splits": 3,
+  "imbalance_strategy": "no_native_class_weight_support_in_sklearn_knn; distance_weighting_only",
+  "best_params": {
+    "classifier__n_neighbors": 41,
+    "classifier__p": 2
+  },
+  "threshold": 0.20297961631662492,
+  "selected_feature_count": 20,
+  "selected_features": [
+    "num__mag_num",
+    "num__mag_missing",
+    "num__len",
+    "num__wid",
+    "num__start_county_mobile_home_share",
+    "num__start_county_unemployment_rate",
+    "num__start_county_disability_rate",
+    "num__end_county_unemployment_rate",
+    "num__end_county_disability_rate",
+    "num__end_county_age_65plus_share",
+    "num__path_est_exposed_pop",
+    "num__path_disability_rate_wavg",
+    "num__path_age_under18_share_wavg",
+    "num__path_age_65plus_share_wavg",
+    "cat__season_Spring",
+    "cat__season_Winter",
+    "cat__region_High Plains",
+    "cat__region_Midwest",
+    "cat__region_Northeast",
+    "cat__region_Western"
+  ],
+  "val_metrics": {
+    "precision": 0.4634146341463415,
+    "recall": 0.48717948717948717,
+    "f1": 0.475,
+    "auroc": 0.8845184472282427,
+    "auprc": 0.3691886114702677,
+    "tp": 114,
+    "fp": 132,
+    "tn": 9699,
+    "fn": 120
+  },
+  "test_metrics": {
+    "precision": 0.4311111111111111,
+    "recall": 0.41452991452991456,
+    "f1": 0.4226579520697168,
+    "auroc": 0.8729898533072168,
+    "auprc": 0.29775357650400286,
+    "tp": 97,
+    "fp": 128,
+    "tn": 9703,
+    "fn": 137
+  }
+}

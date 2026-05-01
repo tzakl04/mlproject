@@ -1,0 +1,21 @@
+task,case,predicted_score,true_label,rank,feature,shap_value,feature_value
+injury,highest_risk_sample,0.9873082041740417,1,1,num__mag_num,3.102071762084961,3.596357793991666
+injury,highest_risk_sample,0.9873082041740417,1,2,num__start_county_mobile_home_share,0.789692759513855,2.7224648728484473
+injury,highest_risk_sample,0.9873082041740417,1,3,cat__season_Spring,0.2889935374259949,0.13767017552829952
+injury,highest_risk_sample,0.9873082041740417,1,4,cat__region_Southern,0.13178382813930511,0.6360475659680026
+injury,highest_risk_sample,0.9873082041740417,1,5,cat__region_High Plains,0.10297001153230667,1.5846188190897603
+injury,highest_risk_sample,0.9873082041740417,1,6,num__path_population_density_wavg,-0.06020987778902054,-0.7963826145757432
+injury,highest_risk_sample,0.9873082041740417,1,7,num__path_unemployment_rate_wavg,-0.05213485658168793,-0.28815913104012253
+injury,highest_risk_sample,0.9873082041740417,1,8,cat__region_Western,0.041908130049705505,0.1562432363617228
+injury,highest_risk_sample,0.9873082041740417,1,9,num__mag_missing,0.030262518674135208,0.0
+injury,highest_risk_sample,0.9873082041740417,1,10,num__start_county_disability_rate,-0.024539316073060036,0.0
+fatality,highest_risk_sample,0.9936175346374512,1,1,num__mag_num,3.562361717224121,3.6028894784763725
+fatality,highest_risk_sample,0.9936175346374512,1,2,cat__region_Western,0.7626317739486694,2.191107593612157
+fatality,highest_risk_sample,0.9936175346374512,1,3,num__end_county_age_65plus_share,0.7560129165649414,8.932125503619801
+fatality,highest_risk_sample,0.9936175346374512,1,4,num__path_disability_rate_wavg,-0.042320821434259415,2.388572608504466
+fatality,highest_risk_sample,0.9936175346374512,1,5,num__mag_missing,0.03457116708159447,0.0
+fatality,highest_risk_sample,0.9936175346374512,1,6,num__end_county_disability_rate,0.029168693348765373,-0.10822979473317101
+fatality,highest_risk_sample,0.9936175346374512,1,7,num__end_county_unemployment_rate,0.028703302145004272,0.8390696570411086
+fatality,highest_risk_sample,0.9936175346374512,1,8,cat__season_Spring,-0.026669375598430634,1.1319251529399768
+fatality,highest_risk_sample,0.9936175346374512,1,9,num__start_county_unemployment_rate,-0.02565997838973999,0.0
+fatality,highest_risk_sample,0.9936175346374512,1,10,num__path_age_65plus_share_wavg,-0.021153070032596588,1.0

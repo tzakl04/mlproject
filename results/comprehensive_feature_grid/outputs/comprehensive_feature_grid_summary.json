@@ -1,0 +1,22 @@
+{
+  "rows_written": 36,
+  "tasks": [
+    "injury",
+    "fatality"
+  ],
+  "feature_sets": [
+    "tornado_only",
+    "county_enriched",
+    "county_selected"
+  ],
+  "models": [
+    "logistic_regression",
+    "random_forest",
+    "xgboost",
+    "svm",
+    "neural_network",
+    "knn"
+  ],
+  "results_csv": "C:\\Users\\singc\\OneDrive\\Documents\\bruh code\\4641\\Project\\comprehensive_feature_grid\\outputs\\comprehensive_feature_grid_results.csv",
+  "latex_snippet": "C:\\Users\\singc\\OneDrive\\Documents\\bruh code\\4641\\Project\\comprehensive_feature_grid\\outputs\\appendix_comprehensive_feature_grid_tables.tex"
+}
