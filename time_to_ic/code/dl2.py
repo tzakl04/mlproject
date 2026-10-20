@@ -17,7 +17,7 @@ f = pd.read_csv(f'{W}/features.csv')
 clin_cols = ['radial', 'left', 'age', 'male', 'op_Ryan', 'op_Min', 'op_Avery', 'op_Unknown']
 C = f[clin_cols].astype(float).values; C[np.isnan(C)] = np.nanmedian(C, 0)[np.where(np.isnan(C))[1]]
 y = f.y.values.astype(np.float32)
-Z = np.load(f'{W}/dl_inputs2.npz')
+Z = np.load(f'{W}/dl_inputs3.npz' if os.path.exists(f'{W}/dl_inputs3.npz') else f'{W}/dl_inputs2.npz')
 
 class CNN1D(nn.Module):
     def __init__(s, cin, width, depth, drop, k):
@@ -27,6 +27,12 @@ class CNN1D(nn.Module):
             layers += [nn.Conv1d(i, o, k, padding=k // 2), nn.BatchNorm1d(o), nn.ReLU(), nn.MaxPool1d(2)]; i = o
         s.f = nn.Sequential(*layers, nn.Dropout(drop)); s.out = 2 * i + 1
     def forward(s, x, l): h = s.f(x); return torch.cat([h.mean(2), h.amax(2), l[:, None]], 1)
+
+class DualCNN(nn.Module):
+    """Two 1D CNNs (arch, neck) on stacked channels; features concatenated."""
+    def __init__(s, cin, width, depth, drop, k):
+        super().__init__(); s.a = CNN1D(3, width, depth, drop, k); s.b = CNN1D(3, width, depth, drop, k); s.out = s.a.out + s.b.out
+    def forward(s, x, l): return torch.cat([s.a(x[:, :3], l), s.b(x[:, 3:], l)], 1)
 
 class PointNet(nn.Module):
     def __init__(s, cin, width, depth, drop, k=None):
@@ -38,17 +44,20 @@ class PointNet(nn.Module):
     def forward(s, x, l): h = s.f(x); return torch.cat([h.amax(2), h.mean(2), l[:, None]], 1)
 
 class Net(nn.Module):
-    def __init__(s, enc, nclin, drop):
+    def __init__(s, enc, nclin, drop, opgain=False):
         super().__init__(); s.enc = enc
         s.head = nn.Sequential(nn.Linear(enc.out, 32), nn.ReLU(), nn.Dropout(drop), nn.Linear(32, 1))
         s.lin = nn.Linear(nclin, 1) if nclin else None
+        s.gain = nn.Linear(4, 1) if opgain else None  # per-operator scaling of the morphology term
+        if opgain: nn.init.zeros_(s.gain.weight); nn.init.ones_(s.gain.bias)
     def forward(s, x, l, c):
         o = s.head(s.enc(x, l))[:, 0]
+        if s.gain is not None: o = o * s.gain(c[:, -4:])[:, 0]
         if s.lin is not None: o = o + s.lin(c)[:, 0]
         return o
 
 def make_enc(cfg, cin):
-    E = CNN1D if cfg['arch'] == 'cnn' else PointNet
+    E = CNN1D if cfg['arch'] == 'cnn' else DualCNN if cfg['arch'] == 'dual' else PointNet
     return E(cin, cfg['width'], cfg['depth'], cfg['drop'], cfg['kernel'])
 
 def rot_batch(n, deg, g):
@@ -71,6 +80,7 @@ def pn_aug(x, cfg, g):
 
 def get_inputs(cfg):
     seg = cfg['seg']
+    if cfg['arch'] == 'dual': return np.concatenate([Z['prof_arch'], Z['prof_neck']], 2), Z['logL_arch'], None
     if cfg['arch'] == 'cnn': return Z[f'prof_{seg}'], Z[f'logL_{seg}'], None
     return None, Z[f'logL_{seg}'], torch.tensor(Z[f'cloud_{seg}'])
 
@@ -83,15 +93,17 @@ def run_fold(cfg, tr, te, seed, prof, logL, cloud):
         rr = RidgeCV(alphas=np.logspace(-2, 3, 20)).fit((C[tr] - cm) / cs, y[tr]); base = rr.predict((C - cm) / cs).astype(np.float32)
     t = y - base; mu, sd = t[tr].mean(), t[tr].std() + 1e-6; yt = torch.tensor((t - mu) / sd)
     nclin = C.shape[1] if (cfg['clin'] and cfg['target'] != 'residual') else 0
-    net = Net(make_enc(cfg, 3 if cfg['arch'] == 'cnn' else 4), nclin, cfg['drop'])
+    net = Net(make_enc(cfg, 6 if cfg['arch'] == 'dual' else 3 if cfg['arch'] == 'cnn' else 4), nclin, cfg['drop'], cfg.get('opgain', False))
     if cfg['pretrain']:
-        sdict = torch.load(f"{W}/{cfg['pretrain']}"); net.enc.load_state_dict(sdict, strict=False)
+        sdict = torch.load(f"{W}/{cfg['pretrain']}")
+        if cfg['arch'] == 'dual': net.enc.a.load_state_dict(sdict, strict=False); net.enc.b.load_state_dict(sdict, strict=False)
+        else: net.enc.load_state_dict(sdict, strict=False)
     opt = torch.optim.AdamW(net.parameters(), lr=cfg['lr'], weight_decay=cfg['wd'])
     E = cfg['epochs']; sched = torch.optim.lr_scheduler.OneCycleLR(opt, cfg['lr'], total_steps=E * ((len(tri) + cfg['bs'] - 1) // cfg['bs']), pct_start=0.15)
     lossf = nn.HuberLoss(delta=1.0); K = prof.shape[1] if prof is not None else 0
     def batch(bi, train):
         l = logL[bi, 0]
-        if cfg['arch'] == 'cnn':
+        if cfg['arch'] in ('cnn', 'dual'):
             ai = rng.integers(1, K, len(bi)) if train and K > 1 else np.zeros(len(bi), int)
             if train: ai = np.where(rng.random(len(bi)) < cfg['aug_frac'], ai, 0)
             x = torch.tensor(prof[bi, ai]); l = logL[bi, ai]
@@ -112,7 +124,7 @@ def run_fold(cfg, tr, te, seed, prof, logL, cloud):
     with torch.no_grad():
         x, l, c = batch(tei, False); ps.append(net(x, l, c).numpy())
         for a in range(cfg['tta']):
-            if cfg['arch'] == 'cnn':
+            if cfg['arch'] in ('cnn', 'dual'):
                 ai = np.full(len(tei), 1 + a % max(K - 1, 1)); x = torch.tensor(prof[tei, ai]); l = torch.tensor(logL[tei, ai])
             else:
                 x = pn_aug(cloud[tei], cfg, g)

@@ -11,7 +11,7 @@ torch.set_num_threads(4); torch.manual_seed(0); rng = np.random.default_rng(0); 
 arch = sys.argv[1]; out = sys.argv[2]; E = int(sys.argv[3]) if len(sys.argv) > 3 else 60
 cfg = {**DEF, 'arch': arch}
 cfg.update(json.loads(sys.argv[4]) if len(sys.argv) > 4 else {})
-U, UL, UC = Z['u_prof'], Z['u_logL'], torch.tensor(Z['u_cloud']); n, K = U.shape[:2]
+ck = cfg.get('corpus', 'u'); U, UL, UC = Z[f'{ck}_prof'], Z[f'{ck}_logL'], torch.tensor(Z[f'{ck}_cloud']); n, K = U.shape[:2]
 enc = (CNN1D if arch == 'cnn' else PointNet)(3 if arch == 'cnn' else 4, cfg['width'], cfg['depth'], 0.0, cfg['kernel'])
 proj = nn.Sequential(nn.Linear(enc.out, 64), nn.ReLU(), nn.Linear(64, 32))
 opt = torch.optim.AdamW(list(enc.parameters()) + list(proj.parameters()), lr=2e-3, weight_decay=1e-2)

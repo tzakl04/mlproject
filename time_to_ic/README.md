@@ -39,3 +39,13 @@ The best sweep configs reach ρ 0.58-0.59 on the sweep folds, but on fresh folds
 ensemble ρ 0.558 (Δρ +0.054, CI -0.016 to +0.129). A consistent but small gain whose
 confidence interval still includes zero at n = 101. Heavier augmentation mattered less
 than pretraining: without the unlabeled-route pretraining the CNN matches the baseline.
+
+Round 3 (`results/round3/`): richer feature models (elastic net, PLS, kernel ridge,
+boosting, forest, two-stage), frozen pretrained embeddings, a fused arch+neck encoder,
+a wider encoder pretrained on 1,292 routes, a per-operator gain, slow-access
+classification (AUC) and a within-operator analysis. None beats the round-2 model.
+The one sizeable, significant finding: within Min Park's 36 cases the deep ensemble's
+morphology adjustment correlates with the clinical residual at rho 0.55 (CI 0.28-0.73,
+permutation p = 0.002); within Ryan Kellogg's 45 cases (median 5 min) rho 0.18, n.s.
+Full report: see the project thread. Next step is more labelled centerlines
+(112 anterior cases with time to IC have no processed path yet).
