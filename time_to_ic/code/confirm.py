@@ -34,7 +34,8 @@ def boot(pa, pb, n=2000, seed=0):
     return dict(d_rho=float(np.mean(dr)), d_rho_lo=float(np.percentile(dr, 2.5)), d_rho_hi=float(np.percentile(dr, 97.5)),
                 d_mae=float(np.mean(dm)), d_mae_lo=float(np.percentile(dm, 2.5)), d_mae_hi=float(np.percentile(dm, 97.5)))
 
-if sys.argv[1] == 'collect':
+if len(sys.argv) < 2: pass
+elif sys.argv[1] == 'collect':
     rows = []
     for fn in sorted(glob.glob(f'{W}/sweep/*.json')):
         d = json.load(open(fn)); name = os.path.basename(fn)[:-5]
@@ -52,7 +53,8 @@ else:
     rows = [dict(name='clinical ridge', **pd.DataFrame(bs).mean().to_dict())]
     for name in sys.argv[2:]:
         cfg = json.load(open(f'{W}/sweep/{name}.json'))['cfg']; cfg.update(fold_file='folds_confirm.json', reps=5, threads=2)
-        out, preds = dl2.run(cfg); np.save(f'{W}/confirm/{name}.npy', preds)
+        runner = __import__('dl_seq2').run if name.startswith('seq2_') else __import__('dl_seq').run if name.startswith('seq_') else dl2.run
+        out, preds = runner(cfg); np.save(f'{W}/confirm/{name}.npy', preds)
         b = boot(preds, base); out.update(b); json.dump(out, open(f'{W}/confirm/{name}.json', 'w'))
         rows.append(dict(name=name, spearman=out['spearman'], mae_log=out['mae_log'], mae_min=out['mae_min'], **b)); print(name, {k: round(v, 3) for k, v in rows[-1].items() if k != 'name'})
     pd.DataFrame(rows).to_csv(f'{W}/confirm_round2_{sys.argv[2]}.csv', index=False)

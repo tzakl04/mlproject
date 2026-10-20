@@ -23,6 +23,7 @@ folder. The scripts expect them under `/home/claude/data` and `/home/claude/work
 | `baselines.py` | Ridge and random-forest baselines on clinical, lab-table and hand-crafted feature sets. |
 | `prep_dl.py`, `train_dl.py` | Round 1: 1D CNN on curvature/torsion/radius profiles and PointNet on 3D coordinates, with ±15° rotation, scaling, jitter and resampling augmentation. |
 | `prep_dl2.py`, `pretrain.py`, `dl2.py` | Round 2: heavier augmentation (random warps, crops, smoothing), contrastive pretraining on all 811 unlabeled routes (every patient × 4 routes × 2 segments), residual-on-clinical target, mixup, seed ensembles, config sweep. |
+| `prep_seq.py`, `dl_seq.py`, `dl_seq2.py`, `pretrain_seq.py` | Round 4: each path as a sequence of direction changes (unit tangents in a canonical frame + rotation-invariant turn vectors in a parallel-transport frame + radius); 1D CNN, bidirectional GRU and Transformer encoders, contrastive pretraining on the same corpus, optional auxiliary difficulty-rating heads and pairwise rank loss. |
 | `plots.py` | Results table and figures. |
 
 ## Results
@@ -47,5 +48,13 @@ classification (AUC) and a within-operator analysis. None beats the round-2 mode
 The one sizeable, significant finding: within Min Park's 36 cases the deep ensemble's
 morphology adjustment correlates with the clinical residual at rho 0.55 (CI 0.28-0.73,
 permutation p = 0.002); within Ryan Kellogg's 45 cases (median 5 min) rho 0.18, n.s.
+Round 4 (`results/round4/`): the path encoded directly as a sequence of direction
+changes (turn vectors) and fed to a CNN, GRU and Transformer. On sweep folds the pretrained
+turn-vector CNN reaches rho 0.548 and the GRU 0.540, the Transformer 0.530; tangent-vector and
+mixed channels, difficulty-rating auxiliary heads and a rank loss were all worse. On fresh
+folds the turn-vector CNN is rho 0.504 (no better than clinical) and the GRU 0.520. Adding the
+GRU to the round-2 ensemble gives rho 0.568, MAE 4.90 min (d_rho +0.064, CI +0.001 to +0.139;
+d_MAE -0.39 min, CI -0.72 to -0.08 vs clinical ridge), the first interval that excludes zero,
+though the ensemble was chosen after seeing the fresh-fold results.
 Full report: see the project thread. Next step is more labelled centerlines
 (112 anterior cases with time to IC have no processed path yet).
