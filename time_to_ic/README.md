@@ -66,5 +66,15 @@ reach rho 0.10-0.16. Within the new batch nothing predicts time to IC, not even 
 operators' hindsight difficulty ratings (rho -0.07), which points at operator mix and
 recording differences rather than at the morphology models: the 27 early-ID new cases
 (median 13 min) and the 63 late-ID ones (median 6 min) behave like two different series.
+Round 6 (`results/round6/`, 2026-11-02, operator removed as a covariate at the owner's request):
+reframed targets on the 191 cases. (a) Expert-rated access difficulty: neck morphology
+predicts the neck rating (rho 0.29, AUC 0.73 for "challenging or worse", 95% CI 0.64-0.81)
+and adds to approach/side/age/sex (AUC 0.62); the arch rating is predicted mostly by age and
+approach (AUC 0.70) with arch morphology adding little (0.69-0.72). Pretrained CNN/PointNet on
+the same targets: arch 0.68-0.71 AUC, neck 0.61, no better than the feature models.
+(b) Slow access (> 10 or > 12 min) without operator: every model is at chance (AUC 0.42-0.57),
+and even the hindsight ratings reach only 0.59-0.72. (c) Positional analysis: local bend
+magnitude at 45-50% of the arch segment correlates with the arch rating (rho 0.2, p 0.01);
+k-means on the direction sequence recovers side and approach, not arch type.
 Full report: see the project thread. Next step is more labelled centerlines
 (112 anterior cases with time to IC have no processed path yet).
