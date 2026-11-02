@@ -1,0 +1,4 @@
+op,n,ensemble,cnn_residual_arch_pre,pn_residual_arch_pre,seq_cnn_turn_pre,seq_gru_turn_pre
+Ryan,45,0.18,0.196,0.15,0.325,0.292
+Min,36,0.553,0.55,0.444,0.282,0.368
+Avery,15,0.314,0.025,0.464,0.064,0.025

@@ -1,0 +1,92 @@
+{
+ "r2": {
+  "operator": 0.2948938289393346,
+  "approach+side": 0.06840066715742676,
+  "age+sex": 0.00021891281940167318,
+  "clinical (all)": 0.3696748965223302,
+  "clinical+difficulty ratings": 0.4286310774098919,
+  "clinical+arch hand-crafted": 0.485404528646584,
+  "difficulty ratings only": 0.06615164837363119
+ },
+ "resid_rho": {
+  "arch_diff": 0.24625442346026674,
+  "neck_diff": 0.2675420374187659,
+  "arch+neck diff (sum)": 0.2729774165486855
+ },
+ "predict_arch_diff_from_morph": 0.11804468368436367,
+ "predict_arch_diff_from_clin+morph": 0.3042433850209544,
+ "predict_arch_diff_from_clin": 0.326041515009175,
+ "predict_neck_diff_from_morph": 0.34924316684867457,
+ "predict_neck_diff_from_clin+morph": 0.2934000193349424,
+ "predict_neck_diff_from_clin": 0.18891409177970833,
+ "auc_fresh_folds": {
+  ">10 min (n=35)": {
+   "clinical ridge": 0.7741125541125541,
+   "clinical+arch hc ridge": 0.7430303030303029,
+   "pretrained CNN": 0.76995670995671,
+   "CNN+PointNet ensemble": 0.7787878787878788
+  },
+  ">12 min (n=23)": {
+   "clinical ridge": 0.7587513935340022,
+   "clinical+arch hc ridge": 0.7211817168338908,
+   "pretrained CNN": 0.7686733556298775,
+   "CNN+PointNet ensemble": 0.7818283166109253
+  }
+ },
+ "within_operator": {
+  "Ryan": {
+   "n": 45,
+   "rho_arch_hc": 0.1745718050065876,
+   "rho_cnn": 0.19472990777338603,
+   "rho_ens": 0.1729907773386034,
+   "rho_raw_ens": 0.31815086381431773,
+   "rho_raw_clin": 0.15610020562460603
+  },
+  "Min": {
+   "n": 36,
+   "rho_arch_hc": 0.250965250965251,
+   "rho_cnn": 0.5523809523809524,
+   "rho_ens": 0.5523809523809524,
+   "rho_raw_ens": 0.5917319789068533,
+   "rho_raw_clin": 0.19490787990272604
+  },
+  "Avery": {
+   "n": 15,
+   "rho_arch_hc": 0.16428571428571426,
+   "rho_cnn": 0.04285714285714285,
+   "rho_ens": 0.3321428571428571,
+   "rho_raw_ens": -0.3395890542786119,
+   "rho_raw_clin": -0.43431652731422477
+  }
+ },
+ "learning_curve": [
+  {
+   "n": 40,
+   "rho_clin": 0.38197977651255893,
+   "rho_arch": 0.2942726911815693,
+   "delta": -0.08770708533098973,
+   "delta_sd": 0.09065128333382348
+  },
+  {
+   "n": 60,
+   "rho_clin": 0.499210189584186,
+   "rho_arch": 0.47483420833850926,
+   "delta": -0.0243759812456768,
+   "delta_sd": 0.0472605991357469
+  },
+  {
+   "n": 80,
+   "rho_clin": 0.4866423451579787,
+   "rho_arch": 0.46119671258635425,
+   "delta": -0.02544563257162451,
+   "delta_sd": 0.02922441234878259
+  },
+  {
+   "n": 101,
+   "rho_clin": 0.527416689781703,
+   "rho_arch": 0.5030988376179049,
+   "delta": -0.024317852163798115,
+   "delta_sd": 0.0
+  }
+ ]
+}

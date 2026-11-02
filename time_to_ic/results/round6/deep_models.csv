@@ -1,0 +1,11 @@
+target,model,folds,n,spearman,spearman_sd,auc_>10min,auc_difficult
+log time to IC (operator-free),cnn_pre,sweep,191,-0.035,0.079,0.448,
+log time to IC (operator-free),cnn_pre,fresh,191,-0.038,0.022,0.458,
+log time to IC (operator-free),pn_pre,sweep,191,0.029,0.069,0.535,
+log time to IC (operator-free),pn_pre,fresh,191,0.089,0.036,0.567,
+arch rating,cnn_pre,sweep,165,0.239,0.035,,0.676
+arch rating,cnn_pre,fresh,165,0.275,0.053,,0.707
+arch rating,cnn_pre_joint,sweep,165,0.242,0.04,,0.683
+arch rating,pn_pre,sweep,165,0.306,0.03,,0.701
+neck rating,cnn_neck_pre,sweep,169,0.131,0.029,,0.607
+neck rating,cnn_neck_pre,fresh,169,0.129,0.072,,0.614
