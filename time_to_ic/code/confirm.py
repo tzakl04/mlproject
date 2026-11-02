@@ -9,7 +9,7 @@ import numpy as np, pandas as pd
 from sklearn.linear_model import RidgeCV
 from scipy.stats import spearmanr
 from cv import score
-W = '/home/claude/work'
+W = os.environ.get('W', '/home/claude/work')
 f = pd.read_csv(f'{W}/features.csv'); y = f.y.values; ymin = f.y_min.values
 clin = ['radial', 'left', 'age', 'male', 'op_Ryan', 'op_Min', 'op_Avery', 'op_Unknown']
 C = f[clin].astype(float).values; C[np.isnan(C)] = np.nanmedian(C, 0)[np.where(np.isnan(C))[1]]

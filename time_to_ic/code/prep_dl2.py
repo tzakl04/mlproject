@@ -7,7 +7,7 @@ profile copies for self-supervised pretraining. Nothing here uses the outcome.
 import sys, os; sys.path.insert(0, '/home/claude/work/src')
 import numpy as np, pandas as pd, scipy.io as sio
 from geom import circumR, torsion, arclen
-D = '/home/claude/data'; W = '/home/claude/work'
+D = '/home/claude/data'; W = os.environ.get('W', '/home/claude/work')
 rng = np.random.default_rng(1)
 N1, N2 = 256, 512
 K_LAB, K_UNL = 60, 16

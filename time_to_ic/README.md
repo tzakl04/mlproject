@@ -56,5 +56,15 @@ folds the turn-vector CNN is rho 0.504 (no better than clinical) and the GRU 0.5
 GRU to the round-2 ensemble gives rho 0.568, MAE 4.90 min (d_rho +0.064, CI +0.001 to +0.139;
 d_MAE -0.39 min, CI -0.72 to -0.08 vs clinical ridge), the first interval that excludes zero,
 though the ensemble was chosen after seeing the fresh-fold results.
+Round 5 (`results/round5/`, 2026-11-02): the lab processed 120 more patients; 90 are
+anterior, single-approach, with a time to IC and a valid arch centerline, giving 191 cases
+(`build_ext.py`, `features_ext.py`). No operator is recorded for the new 90. Pooled 5-fold CV
+on 191: clinical ridge rho 0.30 (0.47 within the old 101, 0.05 within the new 90); the
+pretrained arch CNN 0.27, PointNet 0.25, scratch CNN 0.31, none better than clinical
+(bootstrap CIs include zero). Trained on the old 101 and applied to the new 90, the models
+reach rho 0.10-0.16. Within the new batch nothing predicts time to IC, not even the
+operators' hindsight difficulty ratings (rho -0.07), which points at operator mix and
+recording differences rather than at the morphology models: the 27 early-ID new cases
+(median 13 min) and the 63 late-ID ones (median 6 min) behave like two different series.
 Full report: see the project thread. Next step is more labelled centerlines
 (112 anterior cases with time to IC have no processed path yet).

@@ -8,7 +8,7 @@ import sys, json, time, os; sys.path.insert(0, '/home/claude/work/src')
 import numpy as np, pandas as pd, torch, torch.nn as nn, torch.nn.functional as Fn
 from sklearn.linear_model import RidgeCV
 from cv import score
-W = '/home/claude/work'
+W = os.environ.get('W', '/home/claude/work')
 DEF = dict(arch='cnn', seg='archneck', width=32, depth=4, drop=0.3, lr=2e-3, wd=1e-2, epochs=120, bs=16,
            target='residual', aug_frac=1.0, mixup=0.0, pretrain=None, n_seeds=1, reps=5, fold_file='folds.json',
            tta=8, pn_rot=15, pn_jit=0.002, pn_scale=0.08, pn_drop=0.1, clin=True, threads=4, kernel=7)
